@@ -1,0 +1,23 @@
+<ion-view view-title="Meteo">
+  <ion-content class="padding">
+<div class="padding">
+	<label class="item-floating-label">Longetude : {{meteo.city.coord.lon}}</label>
+	<label class="item-floating-label">Latilude : {{meteo.city.coord.lat}}</label>
+	<label class="item-floating-label">la ville  : {{meteo.city.name}}</label>
+</div>
+<div class="list">
+
+    <a class="item item-thumbnail-left" href="#" ng-repeat="m in meteo.list">
+      <img src="img/{{m.weather[0].main}}.ico">
+      <h2>{{m.dt*1000 | date : 'EEEE dd MM yyyy HH:mm'}}</h2>
+   
+      <label class="item-floating-label">tempirature min : {{m.main.temp_min - 273.15 | number:2}}°C</label>
+      <label class="item-floating-label">tempirature max : {{m.main.temp_max - 273.15 | number:2}} °C</label>
+     <strong><label class="item-floating-label">{{m.weather[0].main}}</label></strong> 
+    </a>
+
+    
+
+</div>
+  </ion-content>
+</ion-view>
