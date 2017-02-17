@@ -11,3 +11,11 @@
 	height: 100px;
 	background:  radial-gradient(circle,transparent 50px,white 50px);
 }
+
+.scroll{
+	height: 100%;
+}
+#map{
+	height: 100%;
+	width: 100%;
+}

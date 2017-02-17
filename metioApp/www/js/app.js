@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('starter', ['ionic'])
+var app = angular.module('starter', ['ionic','ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -40,7 +40,8 @@ templateUrl : "templates/contact.html"
   });
   $stateProvider.state("geo",{
 url : "/geo",
-templateUrl : "templates/geo.html"
+templateUrl : "templates/geo.html",
+controller : "geoController",
   });
   $stateProvider.state("config",{
 url : "/config",
@@ -72,3 +73,23 @@ res.error(function(data){
 $ionicLoading.hide();
 })
 });
+app.controller('geoController', ['$scope','$cordovaGeolocation', function($scope,$cordovaGeolocation){
+  var options = {timeout: 10000, enableHighAccuracy: true};
+ 
+  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+ 
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+ 
+    var mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+ 
+    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+ 
+  }, function(error){
+    console.log("Could not get location", error);
+  });
+ 
+}]);

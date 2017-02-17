@@ -1,5 +1,10 @@
 <<ion-view view-title="geo localisation">
   <ion-content class="bar-positive">
-<h1>geo localisation</h1>
+<div class="padding">
+	<label class="item-floating-label">Longitude : {{position.coords.longitude}}</label>
+	<label class="item-floating-label">Latilude : {{position.coords.latitude}}</label>
+	
+</div>
+<div id="map" data-tap-disabled="true"></div>
   </ion-content>
 </ion-view>
