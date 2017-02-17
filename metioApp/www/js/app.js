@@ -57,13 +57,18 @@ $state.go("infoMeteo",{
 })
   };
 }]);
-app.controller('infoMeteoController', function($scope,$stateParams,$http){
+app.controller('infoMeteoController', function($scope,$stateParams,$http,$ionicLoading){
+
   var url = "http://api.openweathermap.org/data/2.5/forecast?q="+$stateParams.city+"&APPID=2895fd3378eeecf9da273edec134212e";
+$ionicLoading.show({
+  template : "chargement en cours ..."
+});
 var res = $http.get(url);
 res.success(function(data){
 $scope.meteo=data;
+$ionicLoading.hide();
 });
 res.error(function(data){
-
+$ionicLoading.hide();
 })
 });
